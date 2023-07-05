@@ -1,4 +1,4 @@
-﻿namespace Backend.Entities
+﻿namespace Backend.DAL.Entities
 {
     public class Point
     {
@@ -13,6 +13,5 @@
         public string Description { get; set; }
 
         public string PhotoWay { get; set; }
-
     }
 }
