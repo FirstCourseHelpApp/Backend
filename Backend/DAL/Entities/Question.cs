@@ -11,5 +11,7 @@
         public ICollection<Answer> Answers { get; set; }
 
         public Answer RightAnswer { get; set; }
+
+        public Guid RightAnswerId { get; set; }
     }
 }
