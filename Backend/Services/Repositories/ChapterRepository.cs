@@ -1,6 +1,6 @@
 ﻿namespace Backend.Services.Repositories
 {
-    public interface IArticleRepository
+    public class ChapterRepository : IChapterRepository
     {
     }
 }

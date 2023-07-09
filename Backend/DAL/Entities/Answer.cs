@@ -8,6 +8,8 @@
 
         public Question Question { get; set; }
 
+        public bool IsRightAnswer { get; set; }
+
         public Guid QuestionId { get; set; }
     }
 }

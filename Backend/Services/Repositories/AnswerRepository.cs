@@ -1,6 +1,6 @@
 ﻿namespace Backend.Services.Repositories
 {
-    public interface IPhraseRepository
+    public class AnswerRepository : IAnswerRepository
     {
     }
 }

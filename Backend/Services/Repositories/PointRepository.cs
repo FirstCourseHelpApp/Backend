@@ -1,6 +1,6 @@
 ﻿namespace Backend.Services.Repositories
 {
-    public interface IUserRepository
+    public class PointRepository : IPointRepository
     {
     }
 }
