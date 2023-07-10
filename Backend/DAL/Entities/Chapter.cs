@@ -8,6 +8,8 @@
 
         public double? SuccessRate { get; set; }
 
+        public int? Order { get; set; }
+
         public ICollection<SubChapter> SubChapters { get; set; } = new List<SubChapter>();
 
         public Test Test { get; set; }

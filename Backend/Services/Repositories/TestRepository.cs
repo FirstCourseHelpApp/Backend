@@ -5,36 +5,39 @@ namespace Backend.Services.Repositories
 {
     public class TestRepository : ITestRepository
     {
-        private ApplicationContext _dbContext;
-
-        public TestRepository(ApplicationContext dbContext)
+        public Test AddQuestionToTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId)
         {
-            _dbContext = dbContext;
+            throw new NotImplementedException();
         }
 
-        public Test CreateTest(Guid chapterId, ICollection<Question> questions)
+        public Test CreateTest(FirstCusrHelpAppContext dbContext, int order, Guid chapterId)
         {
             var test = new Test
             {
                 Id = Guid.NewGuid(),
+                Order = order,
                 ChapterId = chapterId,
-                Questions = questions
             };
 
-            _dbContext.Tests.Add(test);
-            _dbContext.SaveChanges();
+            dbContext.Tests.Add(test);
+            dbContext.SaveChanges();
 
             return test;
         }
 
-        public Test GetTest(Guid chapterId)
+        public Test GetTest(FirstCusrHelpAppContext dbContext, Guid chapterId)
         {
-            return _dbContext.Tests.FirstOrDefault(x => x.ChapterId == chapterId);
+            return dbContext.Tests.FirstOrDefault(x => x.ChapterId == chapterId);
         }
 
-        public ICollection<Test> GetTests()
+        public ICollection<Test> GetTests(FirstCusrHelpAppContext dbContext)
         {
-            return _dbContext.Tests.ToList();
+            return dbContext.Tests.ToList();
+        }
+
+        public Test RemoveQuestionFromTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

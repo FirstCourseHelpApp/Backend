@@ -1,13 +1,18 @@
 ﻿using Backend.DAL.Entities;
+using Backend.Services.Context;
 
 namespace Backend.Services.Repositories
 {
     public interface IAnswerRepository
     {
-        public Answer CreateAnswer(string text, Question question);
+        public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string text, Guid questionId);
 
-        public bool SetRightAnswer(Guid QuestionId, Guid rightAnswerId);
+        public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string text);
 
-        public ICollection<Answer> GetQuestionAnswers(Guid questionId);
+        public bool SetRightAnswer(FirstCusrHelpAppContext dbContext, Guid QuestionId, Guid rightAnswerId);
+
+        public Answer GetAnswer(FirstCusrHelpAppContext dbContext, Guid answerId);
+
+        public ICollection<Answer> GetQuestionAnswers(FirstCusrHelpAppContext dbContext, Guid questionId);
     }
 }

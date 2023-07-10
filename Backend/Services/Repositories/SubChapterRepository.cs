@@ -5,34 +5,33 @@ namespace Backend.Services.Repositories
 {
     public class SubChapterRepository : ISubChapterRepository
     {
-        private readonly ApplicationContext _dbContext;
-
-        public SubChapterRepository(ApplicationContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public SubChapter CreateSubChapter(string name, Guid chapterId)
+        public SubChapter CreateSubChapter(FirstCusrHelpAppContext dbContext, string name, int order, Guid chapterId)
         {
             var subChapter = new SubChapter
             {
                 Id = Guid.NewGuid(),
                 Name = name,
+                Order = order,
                 ChapterId = chapterId
             };
 
-            _dbContext.SubChapters.Add(subChapter);
-            _dbContext.SaveChanges();
+            dbContext.SubChapters.Add(subChapter);
+            dbContext.SaveChanges();
 
             return subChapter;
         }
 
-        public SubChapter GetSubChapterById(Guid id)
+        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return _dbContext.SubChapters.FirstOrDefault(x => x.Id == id);
+            return dbContext.SubChapters.FirstOrDefault(x => x.Id == id);
         }
 
-        public SubChapter GetSubChapterWithUserProgress(Guid id, Guid userId)
+        public SubChapter GetSubChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid id, Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SubChapter SetDocWay(FirstCusrHelpAppContext dbContext, Guid subChapterId, string docWay)
         {
             throw new NotImplementedException();
         }

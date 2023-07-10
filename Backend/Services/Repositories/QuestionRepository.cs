@@ -5,36 +5,39 @@ namespace Backend.Services.Repositories
 {
     public class QuestionRepository : IQuestionRepository
     {
-        private readonly ApplicationContext _dbContext;
-
-        public QuestionRepository(ApplicationContext dbContext)
+        public Question AddAnswerToQuestion(FirstCusrHelpAppContext dbContext, Guid questionId, Guid AnswerId)
         {
-            _dbContext = dbContext;
+            throw new NotImplementedException();
         }
-        public Question CreateQuestion(string questionText, ICollection<Answer> answers, Guid testId)
+
+        public Question CreateQuestion(FirstCusrHelpAppContext dbContext, string questionText, Guid testId)
         {
             var question = new Question
             {
                 Id = Guid.NewGuid(),
                 QuestionText = questionText,
                 TestId = testId,
-                Answers = answers
             };
 
-            _dbContext.Questions.Add(question);
-            _dbContext.SaveChanges();
+            dbContext.Questions.Add(question);
+            dbContext.SaveChanges();
 
             return question;
         }
 
-        public Question GetQuestion(Guid id)
+        public Question GetQuestion(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return _dbContext.Questions.FirstOrDefault(x => x.Id == id);
+            return dbContext.Questions.FirstOrDefault(x => x.Id == id);
         }
 
-        public ICollection<Question> GetQuestions()
+        public ICollection<Question> GetQuestions(FirstCusrHelpAppContext dbContext)
         {
-            return _dbContext.Questions.ToList();
+            return dbContext.Questions.ToList();
+        }
+
+        public Question RemoveAnswerFromQuestion(FirstCusrHelpAppContext dbContext, Guid questionId, Guid AnswerId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

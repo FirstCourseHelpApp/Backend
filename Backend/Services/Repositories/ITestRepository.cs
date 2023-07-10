@@ -1,13 +1,18 @@
 ﻿using Backend.DAL.Entities;
+using Backend.Services.Context;
 
 namespace Backend.Services.Repositories
 {
     public interface ITestRepository
     {
-        public Test CreateTest(Guid chapterId, ICollection<Question> questions);
+        public Test CreateTest(FirstCusrHelpAppContext dbContext, int order, Guid chapterId);
 
-        public Test GetTest(Guid chapterId);
+        public Test GetTest(FirstCusrHelpAppContext dbContext, Guid chapterId);
 
-        public ICollection<Test> GetTests();
+        public Test AddQuestionToTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId);
+
+        public Test RemoveQuestionFromTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId);
+
+        public ICollection<Test> GetTests(FirstCusrHelpAppContext dbContext);
     }
 }

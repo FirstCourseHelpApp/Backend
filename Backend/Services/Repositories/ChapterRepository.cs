@@ -5,41 +5,49 @@ namespace Backend.Services.Repositories
 {
     public class ChapterRepository : IChapterRepository
     {
-        private ApplicationContext _dbContext;
 
-        public ChapterRepository(ApplicationContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public Chapter CreateChapter(ICollection<SubChapter> subChapters, Test test)
+        public Chapter CreateChapter(FirstCusrHelpAppContext dbContext, int order)
         {
             var chapter = new Chapter
             {
                 Id = Guid.NewGuid(),
-                SubChapters = subChapters,
-                Test = test
+                Order = order,
             };
 
-            _dbContext.Chapters.Add(chapter);
-            _dbContext.SaveChanges();
+            dbContext.Chapters.Add(chapter);
+            dbContext.SaveChanges();
 
             return chapter;
         }
 
-        public Chapter GetChapterById(Guid id)
+        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return _dbContext.Chapters.FirstOrDefault(x => x.Id == id);
+            return dbContext.Chapters.FirstOrDefault(x => x.Id == id);
         }
 
-        public Chapter GetChapterByIdWithUserProgress(Guid chapterId, Guid userId)
+        public Chapter GetChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Chapter> GetChapters()
+        public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext)
         {
-            return _dbContext.Chapters.ToList();
+            return dbContext.Chapters;
+        }
+
+        public Chapter SetTest(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid testId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Chapter AddSubChapterToChupter(FirstCusrHelpAppContext dbContext, Guid subChapterId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Chapter RemoveSubChapterFromChupter(FirstCusrHelpAppContext dbContext, Guid subChapterId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

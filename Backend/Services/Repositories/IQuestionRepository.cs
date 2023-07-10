@@ -1,13 +1,18 @@
 ﻿using Backend.DAL.Entities;
+using Backend.Services.Context;
 
 namespace Backend.Services.Repositories
 {
     public interface IQuestionRepository
     {
-        public Question CreateQuestion(string question, ICollection<Answer> answers, Guid testId);
+        public Question CreateQuestion(FirstCusrHelpAppContext dbContext, string question, Guid testId);
 
-        public Question GetQuestion(Guid id);
+        public Question AddAnswerToQuestion(FirstCusrHelpAppContext dbContext, Guid questionId, Guid AnswerId);
 
-        public ICollection<Question> GetQuestions();
+        public Question RemoveAnswerFromQuestion(FirstCusrHelpAppContext dbContext, Guid questionId, Guid AnswerId);
+
+        public Question GetQuestion(FirstCusrHelpAppContext dbContext, Guid id);
+
+        public ICollection<Question> GetQuestions(FirstCusrHelpAppContext dbContext);
     }
 }

@@ -45,6 +45,10 @@
               "target": "Package",
               "version": "[13.3.1, )"
             },
+            "HotChocolate.Authorization": {
+              "target": "Package",
+              "version": "[13.3.1, )"
+            },
             "HotChocolate.Data.EntityFramework": {
               "target": "Package",
               "version": "[13.3.1, )"
@@ -52,6 +56,14 @@
             "HotChocolate.Types.Analyzers": {
               "target": "Package",
               "version": "[13.3.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",

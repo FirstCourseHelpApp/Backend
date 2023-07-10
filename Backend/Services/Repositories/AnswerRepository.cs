@@ -5,37 +5,41 @@ namespace Backend.Services.Repositories
 {
     public class AnswerRepository : IAnswerRepository
     {
-        private readonly ApplicationContext _dbContext;
 
-        public AnswerRepository(ApplicationContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public Answer CreateAnswer(string text, Question question)
+        public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string text, Guid questionId)
         {
             var answer = new Answer
             {
                 Id = Guid.NewGuid(),
                 IsRightAnswer = false,
-                Question = question,
+                QuestionId = questionId,
                 Text = text
             };
 
-            _dbContext.Answers.Add(answer);
-            _dbContext.SaveChanges();
+            dbContext.Answers.Add(answer);
+            dbContext.SaveChanges();
 
             return answer;
         }
 
-        public ICollection<Answer> GetQuestionAnswers(Guid questionId)
+        public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string text)
         {
-            return _dbContext.Questions.FirstOrDefault(x => x.Id == questionId).Answers;
+            throw new NotImplementedException();
         }
 
-        public bool SetRightAnswer(Guid questionId, Guid rightAnswerId)
+        public Answer GetAnswer(FirstCusrHelpAppContext dbContext, Guid answerId)
         {
-            var question = _dbContext.Questions.FirstOrDefault(x => x.Id == questionId);
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Answer> GetQuestionAnswers(FirstCusrHelpAppContext dbContext, Guid questionId)
+        {
+            return dbContext.Questions.FirstOrDefault(x => x.Id == questionId).Answers;
+        }
+
+        public bool SetRightAnswer(FirstCusrHelpAppContext dbContext, Guid questionId, Guid rightAnswerId)
+        {
+            var question = dbContext.Questions.FirstOrDefault(x => x.Id == questionId);
             if (question != null)
             {
                 var answer = question.Answers.FirstOrDefault(x => x.Id == rightAnswerId);
@@ -43,8 +47,8 @@ namespace Backend.Services.Repositories
                 {
                     answer.IsRightAnswer = true;
 
-                    _dbContext.Update(answer);
-                    _dbContext.SaveChanges();
+                    dbContext.Update(answer);
+                    dbContext.SaveChanges();
 
                     return true;
                 }

@@ -101,3 +101,10 @@ D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\runtime
 D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\HotChocolate.Data.dll
 D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\HotChocolate.Data.EntityFramework.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\study\2 curs\summer practice\Project\Backend\Backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

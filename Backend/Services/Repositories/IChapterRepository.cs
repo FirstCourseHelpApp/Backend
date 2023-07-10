@@ -1,15 +1,22 @@
 ﻿using Backend.DAL.Entities;
+using Backend.Services.Context;
 
 namespace Backend.Services.Repositories
 {
     public interface IChapterRepository
     {
-        public Chapter CreateChapter(ICollection<SubChapter> subChapters, Test test);
+        public Chapter CreateChapter(FirstCusrHelpAppContext dbContext, int order);
 
-        public Chapter GetChapterById(Guid id);
+        public Chapter SetTest(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid testId); 
 
-        public ICollection<Chapter> GetChapters();
+        public Chapter AddSubChapterToChupter(FirstCusrHelpAppContext dbContext, Guid subChapterId);
 
-        public Chapter GetChapterByIdWithUserProgress(Guid chapterId, Guid userId);
+        public Chapter RemoveSubChapterFromChupter(FirstCusrHelpAppContext dbContext, Guid subChapterId);
+
+        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid id);
+
+        public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext);
+
+        public Chapter GetChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid userId);
     }
 }

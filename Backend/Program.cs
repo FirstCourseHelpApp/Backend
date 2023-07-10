@@ -10,10 +10,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddHttpClient();
 builder.Services.AddGraphQLServer();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
+
+builder.Services.AddDbContext<FirstCusrHelpAppContext>(options => options.UseSqlite("Data Source=firstCursHelpApp.db"));
+
 
 builder.Services
     .AddGraphQLServer()
@@ -22,18 +36,7 @@ builder.Services
     .AddSorting()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .RegisterDbContext<ApplicationContext>();
-
-
-    builder.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(policy =>
-            {
-                policy.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
-        });
+    .RegisterDbContext<FirstCusrHelpAppContext>();
 
 
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
@@ -54,14 +57,12 @@ builder.Services.AddEndpointsApiExplorer()
 
 var app = builder.Build();
 
+app.UseRouting();
+
 app.MapGraphQL();
 app.UseCors();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
 
 app.Run();

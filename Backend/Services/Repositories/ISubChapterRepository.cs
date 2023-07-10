@@ -1,13 +1,16 @@
 ﻿using Backend.DAL.Entities;
+using Backend.Services.Context;
 
 namespace Backend.Services.Repositories
 {
     public interface ISubChapterRepository
     {
-        public SubChapter CreateSubChapter(string name, Guid chapterId);
+        public SubChapter CreateSubChapter(FirstCusrHelpAppContext dbContext, string name, int order, Guid chapterId);
 
-        public SubChapter GetSubChapterById(Guid id);
+        public SubChapter SetDocWay(FirstCusrHelpAppContext dbContext, Guid subChapterId, string docWay);
 
-        public SubChapter GetSubChapterWithUserProgress(Guid id, Guid userId);
+        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id);
+
+        public SubChapter GetSubChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid id, Guid userId);
     }
 }

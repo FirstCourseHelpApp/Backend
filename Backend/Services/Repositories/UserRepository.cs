@@ -1,15 +1,14 @@
 ﻿using Backend.Services.Context;
 using Backend.DAL.Entities;
+using System.Linq;
 
 namespace Backend.Services.Repositories
 {
     public class UserRepository : IUserRepository
     {
 
-        private readonly ApplicationContext dbContext;
-        public UserRepository(ApplicationContext context) { dbContext = context; }
 
-        public User CreateUser(string email, string password)
+        public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string password)
         {
             var id = Guid.NewGuid();
             var user = new User { Id = id, Email = email, Password = password, IsActive = true };
@@ -22,19 +21,24 @@ namespace Backend.Services.Repositories
             return user;
         }
 
-        public User GetUser(Guid id)
+        public User GetUser(FirstCusrHelpAppContext dbContext, Guid id)
         {
             return dbContext.Users.FirstOrDefault(x => x.Id == id);
         }
 
-        public User GetUserByEmail(string email)
+        public User GetUserByEmail(FirstCusrHelpAppContext dbContext, string email)
         {
             return dbContext.Users.FirstOrDefault(x => x.Email == email);
         }
 
-        public ICollection<User> GetUsers()
+        public UserProgress GetUserProgress(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return dbContext.Users.ToList();
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<User> GetUsers(FirstCusrHelpAppContext dbContext)
+        {
+            return dbContext.Users;
         }
     }
 }
