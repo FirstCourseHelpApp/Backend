@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlite("Data Source=hello.db"));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddHttpClient();
 builder.Services.AddGraphQLServer();

@@ -29,5 +29,10 @@ namespace Backend.Controllers
         {
             return _chapterRepository.GetChapterById(id);
         }
+
+        public User TestController()
+        {
+            return new User { Id = Guid.NewGuid(), Email = "mail@mail", Password = "1212" };
+        }
     }
 }

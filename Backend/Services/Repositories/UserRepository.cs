@@ -12,7 +12,7 @@ namespace Backend.Services.Repositories
         public User CreateUser(string email, string password)
         {
             var id = Guid.NewGuid();
-            var user = new User { Id = id, Email = email, Password = password, PhoneNumber = "89123456789", IsActive = true };
+            var user = new User { Id = id, Email = email, Password = password, IsActive = true };
             var userProgress = new UserProgress { Id = Guid.NewGuid(), UserId = id};
 
             dbContext.Users.Add(user);

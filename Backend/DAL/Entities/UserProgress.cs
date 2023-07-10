@@ -8,7 +8,7 @@
 
         public ICollection<TestProgress> TestProgresses { get; set; } = new List<TestProgress>();
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
         public Guid UserId { get; set; }
     }
