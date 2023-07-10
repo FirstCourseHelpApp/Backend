@@ -11,7 +11,5 @@
         public ICollection<SubChapter> SubChapters { get; set; }
 
         public Test Test { get; set; }
-
-        public Guid TestId { get; set; }
     }
 }
