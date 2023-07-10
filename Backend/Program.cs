@@ -1,3 +1,4 @@
+using Backend;
 using Backend.Controllers;
 using Backend.DAL.Entities;
 using Backend.Services.Context;
@@ -8,18 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddGraphQLServer()
+builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlite("Data Source=hello.db"));
+
+builder.Services.AddHttpClient();
+builder.Services.AddGraphQLServer();
+
+builder.Services
+    .AddGraphQLServer()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .RegisterDbContext<ApplicationContext>();
 
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlite(connectionString));
-
-using (ApplicationContext db = new ApplicationContext())
-{
-    db.Users.Add(new User { Id = Guid.NewGuid() });
-}
 
     builder.Services.AddCors(options =>
         {
