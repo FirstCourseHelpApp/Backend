@@ -22,9 +22,15 @@ namespace Backend.Services.Context
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserProgress> UsersProgress { get; set; } = null!;
 
+        //public ApplicationContext() => Database.EnsureCreated();
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlite("Data Source=firstCursHelpApp.db");
+        //}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
         }
     }
 }
