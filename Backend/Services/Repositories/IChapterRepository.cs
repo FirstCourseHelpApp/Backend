@@ -9,5 +9,7 @@ namespace Backend.Services.Repositories
         public Chapter GetChapterById(Guid id);
 
         public ICollection<Chapter> GetChapters();
+
+        public Chapter GetChapterByIdWithUserProgress(Guid chapterId, Guid userId);
     }
 }

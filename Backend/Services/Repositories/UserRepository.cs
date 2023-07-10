@@ -14,9 +14,11 @@ namespace Backend.Services.Repositories
             var id = Guid.NewGuid();
             var user = new User { Id = id, Email = email, Password = password };
             var userProgress = new UserProgress();
+
             dbContext.Users.Add(user);
             dbContext.UsersProgress.Add(userProgress);
             dbContext.SaveChanges();
+
             return user;
         }
 

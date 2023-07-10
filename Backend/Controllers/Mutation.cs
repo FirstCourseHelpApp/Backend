@@ -6,16 +6,23 @@ namespace Backend.Controllers
     public class Mutation
     {
         private readonly IUserRepository _userRepository;
+        private readonly IChapterRepository _chapterRepository;
 
-        public Mutation(IUserRepository userRepository)
+        public Mutation(IUserRepository userRepository,
+            IChapterRepository chapterRepository)
         {
             _userRepository = userRepository;
+            _chapterRepository = chapterRepository;
         }
 
         public User CreateUser(string email, string password)
         {
-            var user = _userRepository.CreateUser(email, password);
-            return user;
+            return _userRepository.CreateUser(email, password);
+        }
+
+        public Chapter CreateChapter(ICollection<SubChapter> subChapters, Test test)
+        {
+            return _chapterRepository.CreateChapter(subChapters, test);
         }
     }
 }
