@@ -26,6 +26,11 @@ namespace Backend.Services.Repositories
             return dbContext.SubChapters.FirstOrDefault(x => x.Id == id);
         }
 
+        public IQueryable<SubChapter> GetSubChaptersFromChapter(FirstCusrHelpAppContext dbContext, Guid chapterId)
+        {
+            return dbContext.SubChapters.Where(s => s.ChapterId == chapterId);
+        }
+
         public SubChapter GetSubChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid id, Guid userId)
         {
             throw new NotImplementedException();

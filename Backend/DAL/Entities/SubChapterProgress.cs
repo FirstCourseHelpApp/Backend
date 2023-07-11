@@ -6,12 +6,12 @@
 
         public bool IsCompleted { get; set; }
 
-        public User? User { get; set; }
-
-        public Guid UserId { get; set; }
-
         public SubChapter? SubChapter { get; set; }
 
         public Guid SubChapterId { get; set; }
+
+        public UserProgress? UserProgress { get; set; }
+
+        public Guid UserProgressId { get; set; }
     }
 }

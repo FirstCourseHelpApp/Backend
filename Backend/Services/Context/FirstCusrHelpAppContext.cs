@@ -22,5 +22,12 @@ namespace Backend.Services.Context
         public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<UserProgress>? UsersProgress { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.UserProgress)
+                .WithOne(p => p.User)
+                .HasForeignKey<UserProgress>(up => up.UserId);
+        }
     }
 }

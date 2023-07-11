@@ -10,8 +10,8 @@
 
         public Guid TestId { get; set; }
 
-        public User? User { get; set; }
+        public UserProgress UserProgress { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid UserProgressId { get; set; }
     }
 }

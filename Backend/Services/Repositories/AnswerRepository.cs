@@ -16,7 +16,7 @@ namespace Backend.Services.Repositories
                 Text = text
             };
 
-            dbContext.Answers.Add(answer);
+            dbContext.Answers!.Add(answer);
             dbContext.SaveChanges();
 
             return answer;
@@ -24,12 +24,22 @@ namespace Backend.Services.Repositories
 
         public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string text)
         {
-            throw new NotImplementedException();
+            var answer = new Answer
+            {
+                Id = Guid.NewGuid(),
+                IsRightAnswer = false,
+                Text = text
+            };
+
+            dbContext.Answers!.Add(answer);
+            dbContext.SaveChanges();
+
+            return answer;
         }
 
         public Answer GetAnswer(FirstCusrHelpAppContext dbContext, Guid answerId)
         {
-            throw new NotImplementedException();
+            return dbContext.Answers!.FirstOrDefault(a => a.Id == answerId);
         }
 
         public ICollection<Answer> GetQuestionAnswers(FirstCusrHelpAppContext dbContext, Guid questionId)

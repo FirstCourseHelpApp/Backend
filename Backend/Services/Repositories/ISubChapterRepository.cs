@@ -11,6 +11,8 @@ namespace Backend.Services.Repositories
 
         public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id);
 
+        public IQueryable<SubChapter> GetSubChaptersFromChapter(FirstCusrHelpAppContext dbContext, Guid chapterId);
+
         public SubChapter GetSubChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid id, Guid userId);
     }
 }

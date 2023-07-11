@@ -7,9 +7,9 @@ namespace Backend.Services.Repositories
     {
         public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string encryptedPass);
 
-        public UserProgress GetUserProgress(FirstCusrHelpAppContext dbContext, Guid id);
+        public UserProgress GetUserProgress(FirstCusrHelpAppContext dbContext, Guid userId);
 
-        public User GetUser(FirstCusrHelpAppContext dbContext, Guid id);
+        public User GetUser(FirstCusrHelpAppContext dbContext, Guid userId);
 
         public User GetUserByEmail(FirstCusrHelpAppContext dbContext, string email);
 

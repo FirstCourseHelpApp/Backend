@@ -52,9 +52,16 @@ namespace Backend.Controllers
             return _chapterRepository.GetChapter(dbContext, id);
         }
 
-        public User TestController()
+        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return new User { Id = Guid.NewGuid(), Email = "mail@mail", Password = "1212" };
+            return _subChapterRepository.GetSubChapter(dbContext, id);
         }
+
+        public IQueryable<SubChapter> GetSubChaptersFromChapter(FirstCusrHelpAppContext dbContext, Guid chapterId)
+        {
+            return _subChapterRepository.GetSubChaptersFromChapter(dbContext, chapterId);
+        }
+
+
     }
 }

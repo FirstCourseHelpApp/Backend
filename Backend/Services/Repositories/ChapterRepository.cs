@@ -27,7 +27,15 @@ namespace Backend.Services.Repositories
 
         public Chapter GetChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid userId)
         {
-            throw new NotImplementedException();
+            var chapter = dbContext.Chapters.FirstOrDefault(c => c.Id == chapterId);
+            var userProgress = dbContext.UsersProgress.FirstOrDefault(u => u.UserId == userId);
+
+            foreach(var subChapter in chapter.SubChapters)
+            {
+                subChapter.IsCompleted = userProgress.SubChapterProgresses.FirstOrDefault(s => s.SubChapterId == subChapter.Id).IsCompleted; 
+            }
+
+            return chapter;
         }
 
         public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext)
