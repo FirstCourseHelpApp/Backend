@@ -10,14 +10,15 @@ namespace Backend.Services.Repositories
             throw new NotImplementedException();
         }
 
-        public Term GetTerm(FirstCusrHelpAppContext dbContext)
+        public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            throw new NotImplementedException();
+            var term = dbContext.Terms.FirstOrDefault(t => t.Id == id);
+            return term;
         }
 
-        public ICollection<Term> GetTerms(FirstCusrHelpAppContext dbContext)
+        public IQueryable<Term> GetTerms(FirstCusrHelpAppContext dbContext)
         {
-            throw new NotImplementedException();
+            return dbContext.Terms;
         }
     }
 }

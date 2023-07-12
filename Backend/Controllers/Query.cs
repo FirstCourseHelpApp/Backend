@@ -37,31 +37,21 @@ namespace Backend.Controllers
             _userRepository = userRepository;
         }
 
-        public IQueryable<User> GetUsers(FirstCusrHelpAppContext dbContext)
-        {
-            return _userRepository.GetUsers(dbContext);
-        }
+        //return single entity
+        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid id) => _chapterRepository.GetChapter(dbContext, id);
+        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id) => _subChapterRepository.GetSubChapter(dbContext, id);
+        public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid id) => _termRepository.GetTerm(dbContext, id);
+        public User GetUser(FirstCusrHelpAppContext dbContext, Guid id) => _userRepository.GetUser(dbContext, id);
 
-        public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext)
-        {
-            return _chapterRepository.GetChapters(dbContext);
-        }
 
-        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid id)
-        {
-            return _chapterRepository.GetChapter(dbContext, id);
-        }
-
-        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id)
-        {
-            return _subChapterRepository.GetSubChapter(dbContext, id);
-        }
-
+        //return collections of entities
         public IQueryable<SubChapter> GetSubChaptersFromChapter(FirstCusrHelpAppContext dbContext, Guid chapterId)
         {
             return _subChapterRepository.GetSubChaptersFromChapter(dbContext, chapterId);
         }
-
-
+        public IQueryable<User> GetUsers(FirstCusrHelpAppContext dbContext) => _userRepository.GetUsers(dbContext);
+        public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext) => _chapterRepository.GetChapters(dbContext);
+        public IQueryable<Term> GetTerms(FirstCusrHelpAppContext dbContext) => _termRepository.GetTerms(dbContext);
+        // public string DBAdd(FirstCusrHelpAppContext dbContext) => AddingEntitiesToDb.AddTerms(dbContext);
     }
 }

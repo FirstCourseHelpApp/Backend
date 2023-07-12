@@ -7,8 +7,8 @@ namespace Backend.Services.Repositories
     {
         public Term CreateTerm(FirstCusrHelpAppContext dbContext, string word, string explanation);
 
-        public Term GetTerm(FirstCusrHelpAppContext dbContext);
+        public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid id);
 
-        public ICollection<Term> GetTerms(FirstCusrHelpAppContext dbContext);
+        public IQueryable<Term> GetTerms(FirstCusrHelpAppContext dbContext);
     }
 }
