@@ -28,6 +28,16 @@ namespace Backend.Services.Context
                 .HasOne(u => u.UserProgress)
                 .WithOne(p => p.User)
                 .HasForeignKey<UserProgress>(up => up.UserId);
+
+            modelBuilder.Entity<UserProgress>()
+                .HasMany(up => up.SubChapterProgresses)
+                .WithOne(scp => scp.UserProgress)
+                .HasForeignKey(scp => scp.UserProgressId);
+
+            modelBuilder.Entity<Chapter>()
+                .HasMany(c => c.SubChapters)
+                .WithOne(sc => sc.Chapter)
+                .HasForeignKey(sc => sc.ChapterId);
         }
     }
 }

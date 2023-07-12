@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HZ4gdes2zqST1SljUoy/BP0cer4rx20bvyMXfFxm70AqQdWw2jwLW0QoDfseUN/AZjCOTNM0xB7PbohkDbNzKQ==",
+  "dgSpecHash": "Mbe8DlQWR/btB2EF1B0SwTHEkDHG/d9ttrSdgPwEMYr5keoRDWMDw+saGK4AVn4/Wx3q2jxfNKddMMcsz2ES2Q==",
   "success": true,
   "projectFilePath": "D:\\study\\2 curs\\summer practice\\Project\\Backend\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate\\13.3.1\\hotchocolate.13.3.1.nupkg.sha512",
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.abstractions\\13.3.1\\hotchocolate.abstractions.13.3.1.nupkg.sha512",
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.aspnetcore\\13.3.1\\hotchocolate.aspnetcore.13.3.1.nupkg.sha512",
+    "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.aspnetcore.authorization\\13.3.1\\hotchocolate.aspnetcore.authorization.13.3.1.nupkg.sha512",
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.authorization\\13.3.1\\hotchocolate.authorization.13.3.1.nupkg.sha512",
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.data\\13.3.1\\hotchocolate.data.13.3.1.nupkg.sha512",
     "C:\\Users\\sherh\\.nuget\\packages\\hotchocolate.data.entityframework\\13.3.1\\hotchocolate.data.entityframework.13.3.1.nupkg.sha512",

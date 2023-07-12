@@ -1,5 +1,6 @@
 ﻿using Backend.DAL.Entities;
 using Backend.Services.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.Repositories
 {

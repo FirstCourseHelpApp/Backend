@@ -5,13 +5,13 @@ namespace Backend.Services.Auth
 {
     public class AuthOptions
     {
-        public string Issuer { get; set; } = "IssuerString";
+        public const string Issuer = "https://localhost:7207";
 
-        public string Audience { get; set; } = "AudienceString";
+        public const string Audience = "https://localhost:7207";
 
-        public string Key { get; set; } = "SecretKey";
+        const string Key = "this is super super secret key!!!";
 
-        public SymmetricSecurityKey GetSymmetricSecurityKey() =>
+        public static SymmetricSecurityKey GetSymmetricSecurityKey() =>
             new(Encoding.UTF8.GetBytes(Key));
     }
 }

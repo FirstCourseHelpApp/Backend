@@ -77,6 +77,25 @@
           "build/HotChocolate.AspNetCore.targets": {}
         }
       },
+      "HotChocolate.AspNetCore.Authorization/13.3.1": {
+        "type": "package",
+        "dependencies": {
+          "HotChocolate": "13.3.1"
+        },
+        "compile": {
+          "lib/net6.0/HotChocolate.AspNetCore.Authorization.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/HotChocolate.AspNetCore.Authorization.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "HotChocolate.Authorization/13.3.1": {
         "type": "package",
         "dependencies": {
@@ -1404,6 +1423,25 @@
         "lib/net6.0/HotChocolate.AspNetCore.xml",
         "lib/net7.0/HotChocolate.AspNetCore.dll",
         "lib/net7.0/HotChocolate.AspNetCore.xml",
+        "strawberryshake-signet.png"
+      ]
+    },
+    "HotChocolate.AspNetCore.Authorization/13.3.1": {
+      "sha512": "lntPnNexls+xRXmoNX/M8gW32Ywn42UwD14TNbyQK6xTFjKJmVEfi75q7vbFo67ntaSveFs4S3Y1ScGvvlmAdg==",
+      "type": "package",
+      "path": "hotchocolate.aspnetcore.authorization/13.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "greendonut-signet.png",
+        "hotchocolate-signet.png",
+        "hotchocolate.aspnetcore.authorization.13.3.1.nupkg.sha512",
+        "hotchocolate.aspnetcore.authorization.nuspec",
+        "lib/net6.0/HotChocolate.AspNetCore.Authorization.dll",
+        "lib/net6.0/HotChocolate.AspNetCore.Authorization.xml",
+        "lib/net7.0/HotChocolate.AspNetCore.Authorization.dll",
+        "lib/net7.0/HotChocolate.AspNetCore.Authorization.xml",
         "strawberryshake-signet.png"
       ]
     },
@@ -3417,7 +3455,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "HotChocolate.AspNetCore >= 13.3.1",
-      "HotChocolate.Authorization >= 13.3.1",
+      "HotChocolate.AspNetCore.Authorization >= 13.3.1",
       "HotChocolate.Data.EntityFramework >= 13.3.1",
       "HotChocolate.Types.Analyzers >= 13.3.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.19",
@@ -3470,7 +3508,7 @@
             "target": "Package",
             "version": "[13.3.1, )"
           },
-          "HotChocolate.Authorization": {
+          "HotChocolate.AspNetCore.Authorization": {
             "target": "Package",
             "version": "[13.3.1, )"
           },

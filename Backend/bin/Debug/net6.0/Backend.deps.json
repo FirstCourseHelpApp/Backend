@@ -9,7 +9,7 @@
       "Backend/1.0.0": {
         "dependencies": {
           "HotChocolate.AspNetCore": "13.3.1",
-          "HotChocolate.Authorization": "13.3.1",
+          "HotChocolate.AspNetCore.Authorization": "13.3.1",
           "HotChocolate.Data.EntityFramework": "13.3.1",
           "HotChocolate.Types.Analyzers": "13.3.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
@@ -68,6 +68,17 @@
         },
         "runtime": {
           "lib/net6.0/HotChocolate.AspNetCore.dll": {
+            "assemblyVersion": "13.3.1.0",
+            "fileVersion": "13.3.1.0"
+          }
+        }
+      },
+      "HotChocolate.AspNetCore.Authorization/13.3.1": {
+        "dependencies": {
+          "HotChocolate": "13.3.1"
+        },
+        "runtime": {
+          "lib/net6.0/HotChocolate.AspNetCore.Authorization.dll": {
             "assemblyVersion": "13.3.1.0",
             "fileVersion": "13.3.1.0"
           }
@@ -902,6 +913,13 @@
       "sha512": "sha512-w2wjvKVxNTc5SVDTJ9S8ZOCigiYjl58PDz2CqVR6ofGfmjme0ljwRbf5zWJVcdoQyXQn5g8AZNdWn70awv/SRQ==",
       "path": "hotchocolate.aspnetcore/13.3.1",
       "hashPath": "hotchocolate.aspnetcore.13.3.1.nupkg.sha512"
+    },
+    "HotChocolate.AspNetCore.Authorization/13.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lntPnNexls+xRXmoNX/M8gW32Ywn42UwD14TNbyQK6xTFjKJmVEfi75q7vbFo67ntaSveFs4S3Y1ScGvvlmAdg==",
+      "path": "hotchocolate.aspnetcore.authorization/13.3.1",
+      "hashPath": "hotchocolate.aspnetcore.authorization.13.3.1.nupkg.sha512"
     },
     "HotChocolate.Authorization/13.3.1": {
       "type": "package",

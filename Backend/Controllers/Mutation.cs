@@ -1,6 +1,10 @@
-﻿using Backend.DAL.Entities;
+﻿using Backend.DAL.Auth;
+using Backend.DAL.Entities;
+using Backend.Services.Auth;
 using Backend.Services.Context;
 using Backend.Services.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Backend.Controllers
 {
@@ -15,6 +19,7 @@ namespace Backend.Controllers
         private readonly ITermRepository _termRepository;
         private readonly ITestRepository _testRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAuthService _authService;
 
         public Mutation(IAnswerRepository answerRepository,
             IChapterRepository chapterRepository,
@@ -25,7 +30,7 @@ namespace Backend.Controllers
             ITermRepository termRepository,
             ITestRepository testRepository,
             IUserRepository userRepository,
-            FirstCusrHelpAppContext firstCusrHelpAppContext)
+            IAuthService authService)
         {
             _answerRepository = answerRepository;
             _chapterRepository = chapterRepository;
@@ -36,12 +41,21 @@ namespace Backend.Controllers
             _termRepository = termRepository;
             _testRepository = testRepository;
             _userRepository = userRepository;
+            _authService = authService;
         }
 
-        public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string password)
+        public User CreateUserOld(FirstCusrHelpAppContext dbContext, string email, string password)
         {
             return _userRepository.CreateUser(dbContext, email, password);
         }
+
+        public string RegisterUser(
+            [Service] IAuthService authService,
+            UserInput input) => authService.RegisterUser(input);
+        
+        public string AuthorizeUser(
+            [Service] IAuthService authService,
+            TokenInput token) => authService.AuthorizeUser(token);
 
         public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string answer, Guid questionId)
         {
