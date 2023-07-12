@@ -13,6 +13,6 @@ namespace Backend.Services.Repositories
 
         public Question GetQuestion(FirstCusrHelpAppContext dbContext, Guid id);
 
-        public ICollection<Question> GetQuestions(FirstCusrHelpAppContext dbContext);
+        public IQueryable<Question> GetQuestions(FirstCusrHelpAppContext dbContext);
     }
 }

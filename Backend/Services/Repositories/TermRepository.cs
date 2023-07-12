@@ -12,8 +12,7 @@ namespace Backend.Services.Repositories
 
         public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            var term = dbContext.Terms.FirstOrDefault(t => t.Id == id);
-            return term;
+            return dbContext.Terms.FirstOrDefault(t => t.Id == id);
         }
 
         public IQueryable<Term> GetTerms(FirstCusrHelpAppContext dbContext)

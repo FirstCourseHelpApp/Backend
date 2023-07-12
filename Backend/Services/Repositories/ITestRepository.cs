@@ -13,6 +13,6 @@ namespace Backend.Services.Repositories
 
         public Test RemoveQuestionFromTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId);
 
-        public ICollection<Test> GetTests(FirstCusrHelpAppContext dbContext);
+        public IQueryable<Test> GetTests(FirstCusrHelpAppContext dbContext);
     }
 }

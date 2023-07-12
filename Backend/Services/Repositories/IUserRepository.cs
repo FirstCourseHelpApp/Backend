@@ -6,8 +6,6 @@ namespace Backend.Services.Repositories
     public interface IUserRepository
     {
         public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string encryptedPass);
-
-        public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string phoneNumber, string encryptedPass);
         
         public UserProgress GetUserProgress(FirstCusrHelpAppContext dbContext, Guid userId);
 

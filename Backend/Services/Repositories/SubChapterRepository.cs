@@ -1,5 +1,6 @@
 ﻿using Backend.DAL.Entities;
 using Backend.Services.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.Repositories
 {
@@ -28,7 +29,8 @@ namespace Backend.Services.Repositories
 
         public IQueryable<SubChapter> GetSubChaptersFromChapter(FirstCusrHelpAppContext dbContext, Guid chapterId)
         {
-            return dbContext.SubChapters.Where(s => s.ChapterId == chapterId);
+            return dbContext.SubChapters.Where(s => s.ChapterId == chapterId)
+                .OrderBy(sc => sc.Order);
         }
 
         public SubChapter GetSubChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid id, Guid userId)

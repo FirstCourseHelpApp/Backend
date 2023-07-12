@@ -30,9 +30,9 @@ namespace Backend.Services.Repositories
             return dbContext.Tests.FirstOrDefault(x => x.ChapterId == chapterId);
         }
 
-        public ICollection<Test> GetTests(FirstCusrHelpAppContext dbContext)
+        public IQueryable<Test> GetTests(FirstCusrHelpAppContext dbContext)
         {
-            return dbContext.Tests.ToList();
+            return dbContext.Tests;
         }
 
         public Test RemoveQuestionFromTest(FirstCusrHelpAppContext dbContext, Guid testId, Guid questionId)

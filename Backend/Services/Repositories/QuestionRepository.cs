@@ -1,5 +1,6 @@
 ﻿using Backend.DAL.Entities;
 using Backend.Services.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.Repositories
 {
@@ -30,9 +31,9 @@ namespace Backend.Services.Repositories
             return dbContext.Questions.FirstOrDefault(x => x.Id == id);
         }
 
-        public ICollection<Question> GetQuestions(FirstCusrHelpAppContext dbContext)
+        public IQueryable<Question> GetQuestions(FirstCusrHelpAppContext dbContext)
         {
-            return dbContext.Questions.ToList();
+            return dbContext.Questions.Include(q => q.Answers);
         }
 
         public Question RemoveAnswerFromQuestion(FirstCusrHelpAppContext dbContext, Guid questionId, Guid AnswerId)

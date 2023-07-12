@@ -20,9 +20,9 @@ namespace Backend.Services.Repositories
             throw new NotImplementedException();
         }
 
-        public ICollection<Person> GetPersons(FirstCusrHelpAppContext dbContext)
+        public IQueryable<Person> GetPersons(FirstCusrHelpAppContext dbContext)
         {
-            throw new NotImplementedException();
+            return dbContext.Persons;
         }
 
         public Person SetDescription(FirstCusrHelpAppContext dbContext, Guid personId, string Description)

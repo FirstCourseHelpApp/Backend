@@ -1,6 +1,7 @@
 ﻿using Backend.Services.Context;
 using Backend.DAL.Entities;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.Repositories
 {
@@ -8,56 +9,47 @@ namespace Backend.Services.Repositories
     {
         public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string password)
         {
-            var id = Guid.NewGuid();
-            
-            var user = new User() { Id = id, Email = email, Password = password, IsActive = true };
-            var userProgress = new UserProgress() { Id = Guid.NewGuid(), UserId = id, User = user};
-
-            var subChapters = dbContext.SubChapters;
-            var tests = dbContext.Tests;
-
-            var subChapterProgresses = new List<SubChapterProgress>();
-
-            foreach (var subChapter in subChapters)
+            var user = dbContext.Users?.Add(new User 
             {
-                subChapterProgresses!.Add(new SubChapterProgress()
+                Id = Guid.NewGuid(),
+                Email = email,
+                Password = password,
+                IsActive = true
+            }).Entity;
+
+            var userProgress = new UserProgress() { Id = Guid.NewGuid(), UserId = user.Id };
+
+            foreach (var subChapter in dbContext.SubChapters)
+            {
+                userProgress.SubChapterProgresses.Add(new SubChapterProgress()
                 {
                     Id = Guid.NewGuid(),
                     IsCompleted = false,
-                    UserProgress = userProgress,
-                    UserProgressId = userProgress.UserId,
-                    SubChapter = subChapter,
-                    SubChapterId = subChapter.ChapterId
+                    SubChapterId = subChapter.Id,
+                    UserProgressId = userProgress.UserId
                 });
             }
-            
-            dbContext.Users!.Add(user);
-            dbContext.UsersProgress!.Add(userProgress);
-            dbContext.SubChapterProgresses!.AddRange(subChapterProgresses);
+
+            foreach (var test in dbContext.Tests)
+            {
+                userProgress.TestProgresses.Add(new TestProgress()
+                {
+                    Id = Guid.NewGuid(),
+                    MaxScore = 0,
+                    UserProgressId = userProgress.Id,
+                    TestId = test.Id
+                });
+            }
+			
+            dbContext.UsersProgress.Add(userProgress);
             dbContext.SaveChanges();
         
             return user;
         }
 
-        public User CreateUser(FirstCusrHelpAppContext dbContext, string email, string phoneNumber, string password)
-        {
-            var user = new User()
-            {
-                Id = Guid.NewGuid(),
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Password = password,
-                IsActive = true
-            };
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
-
-            return user;
-        }
-
         public User GetUser(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return dbContext.Users.FirstOrDefault(x => x.Id == id);
+            return dbContext.Users.Include(u => u.UserProgress).FirstOrDefault(x => x.Id == id);
         }
 
         public User GetUserByEmail(FirstCusrHelpAppContext dbContext, string email)

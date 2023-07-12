@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Backend.DAL.Auth;
 using Backend.DAL.Entities;
 using Backend.Services.Context;
+using Backend.Services.Repositories;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,20 +15,19 @@ public class AuthService : IAuthService
 	private AuthOptions AuthOptions { get; }
 	private ITimeLimitedDataProtector TimeLimitedDataProtector { get; }
 	private FirstCusrHelpAppContext DbContext { get; }
-	private HttpClient _httpClient;
+	private IUserRepository _userRepository { get; }
 
 	public AuthService(IOptions<AuthOptions> authOptions,
 		IDataProtectionProvider dataProtectionProvider,
-		FirstCusrHelpAppContext dbContext,
-		HttpClient httpClient)
+		IUserRepository userRepository,
+		FirstCusrHelpAppContext dbContext)
 	{
 		AuthOptions = authOptions.Value;
 		TimeLimitedDataProtector = dataProtectionProvider
 			.CreateProtector("auth")
 			.ToTimeLimitedDataProtector();
 
-		_httpClient = httpClient;
-
+		_userRepository = userRepository;
 		DbContext = dbContext;
 	}
 
@@ -36,14 +36,7 @@ public class AuthService : IAuthService
 		var user = DbContext.Users?.FirstOrDefault(u => u.Email == input.Email);
 		if (user == null)
 		{
-			user = DbContext.Users?.Add(new User 
-			{
-				Id = Guid.NewGuid(),
-				Email = input.Email,
-				Password = input.Password,
-				IsActive = true
-			}).Entity;
-			DbContext.SaveChanges();
+			_userRepository.CreateUser(DbContext, input.Email, input.Password);
 		}
 		else
 			throw new Exception(message: "user with such Email is already exists");

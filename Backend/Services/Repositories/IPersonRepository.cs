@@ -15,6 +15,6 @@ namespace Backend.Services.Repositories
 
         public Person GetPerson(FirstCusrHelpAppContext dbContext, Guid personId);
 
-        public ICollection<Person> GetPersons(FirstCusrHelpAppContext dbContext);
+        public IQueryable<Person> GetPersons(FirstCusrHelpAppContext dbContext);
     }
 }
