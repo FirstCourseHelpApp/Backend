@@ -47,7 +47,7 @@ namespace Backend.Services.Repositories
 
         public IQueryable<Chapter> GetChapters(FirstCusrHelpAppContext dbContext)
         {
-            return dbContext.Chapters.OrderBy(c => c.Order);
+            return dbContext.Chapters.Include(c => c.SubChapters.OrderBy(sc => sc.Order)).OrderBy(c => c.Order);
         }
 
         public Chapter SetTest(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid testId)
