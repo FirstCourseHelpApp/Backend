@@ -6,7 +6,9 @@ using Backend.Services.Context;
 using Backend.Services.Repositories;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
 namespace Backend.Services.Auth;
 
@@ -54,23 +56,25 @@ public class AuthService : IAuthService
 		
 		if (user == null) throw new Exception(message:"User is not registrated");
 		if(user.Password != input.Password) throw new Exception(message:"wrong Password or Email");
-
-		var claims = new List<Claim>
+		
+		var handler = new JsonWebTokenHandler();
+		var accessToken = handler.CreateToken(new SecurityTokenDescriptor
 		{
-			new Claim(ClaimTypes.Email, user.Email),
-			new Claim(ClaimTypes.Hash, user.Password),
-			new Claim(ClaimTypes.Name, user.Id.ToString())
-		};
-
-		var jwt = new JwtSecurityToken(
-			issuer: AuthOptions.Issuer,
-			audience: AuthOptions.Audience,
-			claims: claims,
-			expires:DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-			signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(),
+			Claims = new Dictionary<string, object>
+			{
+				[JwtRegisteredClaimNames.Email] = input.Email,
+				[JwtRegisteredClaimNames.CHash] = input.Password,
+				[JwtRegisteredClaimNames.Sub] = user?.Id ?? throw new InvalidDataException()
+			},
+			Issuer = AuthOptions.Issuer,
+			Audience = AuthOptions.Audience,
+			Expires = DateTime.Now.AddMinutes(15),
+			TokenType = "Bearer",
+			SigningCredentials = new SigningCredentials(
+				AuthOptions.GetSymmetricSecurityKey(),
 				SecurityAlgorithms.HmacSha256)
-		);
+		});
 
-		return new JwtSecurityTokenHandler().WriteToken(jwt);
+		return accessToken;
 	}
 }
