@@ -49,7 +49,12 @@ namespace Backend.Services.Repositories
 
         public User GetUser(FirstCusrHelpAppContext dbContext, Guid id)
         {
-            return dbContext.Users.Include(u => u.UserProgress).FirstOrDefault(x => x.Id == id);
+            return dbContext.Users
+                .Include(u => u.UserProgress)
+                .ThenInclude(up => up.SubChapterProgresses)
+                .Include( u => u.UserProgress)
+                .ThenInclude(up => up.TestProgresses)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public User GetUserByEmail(FirstCusrHelpAppContext dbContext, string email)
@@ -62,9 +67,55 @@ namespace Backend.Services.Repositories
             return dbContext.UsersProgress.FirstOrDefault(x => x.UserId == userId);
         }
 
+        public SubChapterProgress UpdateSubChapterProgress(FirstCusrHelpAppContext dbContext, Guid subChapterId, Guid userId)
+        {
+            var subChapterProgress = dbContext.UsersProgress
+                    .Include(up => up.SubChapterProgresses)
+                    .FirstOrDefault(up => up.UserId == userId).SubChapterProgresses
+                    .FirstOrDefault(scp => scp.SubChapterId == subChapterId);
+            
+            subChapterProgress.IsCompleted = true;
+            dbContext.SaveChanges();
+            return subChapterProgress;
+        }
+
+        public TestProgress UpdateTestProgress(FirstCusrHelpAppContext dbContext,Guid testId, int maxScore, Guid userId)
+        {
+            var testProgress = dbContext.UsersProgress
+                .Include(up => up.TestProgresses)
+                .FirstOrDefault(up => up.UserId == userId).TestProgresses
+                .FirstOrDefault(tp => tp.TestId == testId);
+
+            testProgress.MaxScore = maxScore;
+            dbContext.SaveChanges();
+            return testProgress;
+        }
+
         public IQueryable<User> GetUsers(FirstCusrHelpAppContext dbContext)
         {
             return dbContext.Users;
+        }
+
+        public int GetGlobalUserProgressPercent(FirstCusrHelpAppContext dbContext, Guid id)
+        {
+            var user = GetUser(dbContext, id);
+            
+            var total = 1.0;
+            var done = 1.0;
+
+            foreach (var subChapterProgress in user.UserProgress.SubChapterProgresses)
+            {
+                total += 1;
+                if (subChapterProgress.IsCompleted) done += 1;
+            }
+
+            foreach (var testProgress in user.UserProgress.TestProgresses)
+            {
+                total += 5;
+                done += testProgress.MaxScore;
+            }
+
+            return Convert.ToInt32(done / total * 100);
         }
     }
 }

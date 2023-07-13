@@ -41,17 +41,23 @@ namespace Backend.Controllers
         public Chapter GetChapterWithUserProgress(FirstCusrHelpAppContext dbContext, Guid chapterId, Guid userId) =>
             _chapterRepository.GetChapterWithUserProgress(dbContext, chapterId, userId);
         
-        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid id) => _chapterRepository.GetChapter(dbContext, id);
+        public Chapter GetChapter(FirstCusrHelpAppContext dbContext, Guid chapterId)
+            => _chapterRepository.GetChapter(dbContext, chapterId);
         
-        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid id) =>
-            _subChapterRepository.GetSubChapter(dbContext, id);
+        public SubChapter GetSubChapter(FirstCusrHelpAppContext dbContext, Guid chapterId) =>
+            _subChapterRepository.GetSubChapter(dbContext, chapterId);
 
-        public Question GetQuestion(FirstCusrHelpAppContext dbContext, Guid id) =>
-            _questionRepository.GetQuestion(dbContext, id); 
+        public Question GetQuestion(FirstCusrHelpAppContext dbContext, Guid questionId) =>
+            _questionRepository.GetQuestion(dbContext, questionId); 
         
-        public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid id) => _termRepository.GetTerm(dbContext, id);
+        public Term GetTerm(FirstCusrHelpAppContext dbContext, Guid termId) => 
+                _termRepository.GetTerm(dbContext, termId);
         
-        public User GetUser(FirstCusrHelpAppContext dbContext, Guid id) => _userRepository.GetUser(dbContext, id);
+        public User GetUser(FirstCusrHelpAppContext dbContext, Guid userId) => 
+                _userRepository.GetUser(dbContext, userId);
+
+        public int GetGlobalUserProgress(FirstCusrHelpAppContext dbContext, Guid userId) => 
+                _userRepository.GetGlobalUserProgressPercent(dbContext, userId);
 
 
         //return collections of entities
@@ -70,6 +76,9 @@ namespace Backend.Controllers
 
         public IQueryable<Question> GetQuestions(FirstCusrHelpAppContext dbContext) =>
             _questionRepository.GetQuestions(dbContext);
+
+        public IQueryable<Chapter> GetChaptersWithUserProgress(FirstCusrHelpAppContext dbContext, Guid userId) =>
+            _chapterRepository.GetChaptersWithUserProgress(dbContext, userId);
         // public string DBAdd(FirstCusrHelpAppContext dbContext) => AddingEntitiesToDb.AddTerms(dbContext);
     }
 }

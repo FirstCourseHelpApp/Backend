@@ -14,5 +14,11 @@ namespace Backend.Services.Repositories
         public User GetUserByEmail(FirstCusrHelpAppContext dbContext, string email);
 
         public IQueryable<User> GetUsers(FirstCusrHelpAppContext dbContext);
+
+        public int GetGlobalUserProgressPercent(FirstCusrHelpAppContext dbContext, Guid userId);
+
+        public SubChapterProgress UpdateSubChapterProgress(FirstCusrHelpAppContext dbContext,Guid subChapterId, Guid userId);
+
+        public TestProgress UpdateTestProgress(FirstCusrHelpAppContext dbContext,Guid testId, int maxScore, Guid userId);
     }
 }

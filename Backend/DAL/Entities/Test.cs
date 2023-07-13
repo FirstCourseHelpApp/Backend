@@ -5,6 +5,8 @@
         public Guid Id { get; set; }
 
         public int? Order { get; set; }
+        
+        public int? MaxScore { get; set; }
 
         public Chapter? Chapter { get; set; }
 

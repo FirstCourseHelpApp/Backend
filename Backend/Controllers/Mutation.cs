@@ -44,11 +44,6 @@ namespace Backend.Controllers
             _authService = authService;
         }
 
-        public User CreateUserOld(FirstCusrHelpAppContext dbContext, string email, string password)
-        {
-            return _userRepository.CreateUser(dbContext, email, password);
-        }
-
         public string RegisterUser(
             [Service] IAuthService authService,
             UserInput input) => authService.RegisterUser(input);
@@ -58,13 +53,15 @@ namespace Backend.Controllers
             UserInput input) => authService.AuthorizeUser(input);
 
         public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string answer, Guid questionId)
-        {
-            return _answerRepository.CreateAnswer(dbContext, answer, questionId);
-        }
+            => _answerRepository.CreateAnswer(dbContext, answer, questionId);
 
         public Chapter CreateChapter(FirstCusrHelpAppContext dbContext, int order)
-        {
-            return _chapterRepository.CreateChapter(dbContext, order);
-        }
+            => _chapterRepository.CreateChapter(dbContext, order);
+
+        public SubChapterProgress UpdateUserSubChapterProgress(FirstCusrHelpAppContext dbContext, Guid subChapterId, Guid userId)
+            => _userRepository.UpdateSubChapterProgress(dbContext, subChapterId, userId);
+        
+        public TestProgress UpdateUserTestProgress(FirstCusrHelpAppContext dbContext, Guid testId, int maxScore, Guid userId)
+            => _userRepository.UpdateTestProgress(dbContext, testId, maxScore, userId);
     }
 }
