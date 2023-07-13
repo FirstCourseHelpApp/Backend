@@ -41,21 +41,19 @@ public class AuthService : IAuthService
 		else
 			throw new Exception(message: "user with such Email is already exists");
 
-		return AuthorizeUser(new TokenInput()
+		return AuthorizeUser(new UserInput()
 		{
 			Email = input.Email,
-			Password = input.Password,
-			EncryptedCode = string.Empty
+			Password = input.Password
 		});
 	}
 
-	public string AuthorizeUser(TokenInput tokenInput)
+	public string AuthorizeUser(UserInput input)
 	{
-		var user = DbContext.Users?.FirstOrDefault(u => u.Email == tokenInput.Email);
-		if (user == null)
-		{
-			throw new Exception(message:"wrong Password or Email/User is not registrated");
-		}
+		var user = DbContext.Users?.FirstOrDefault(u => u.Email == input.Email);
+		
+		if (user == null) throw new Exception(message:"User is not registrated");
+		if(user.Password != input.Password) throw new Exception(message:"wrong Password or Email");
 
 		var claims = new List<Claim>
 		{

@@ -8,5 +8,5 @@ public interface IAuthService
     
     public string RegisterUser(UserInput input);
 
-    public string AuthorizeUser(TokenInput tokenInput);
+    public string AuthorizeUser(UserInput input);
 }

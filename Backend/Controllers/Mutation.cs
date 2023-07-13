@@ -55,7 +55,7 @@ namespace Backend.Controllers
         
         public string AuthorizeUser(
             [Service] IAuthService authService,
-            TokenInput token) => authService.AuthorizeUser(token);
+            UserInput input) => authService.AuthorizeUser(input);
 
         public Answer CreateAnswer(FirstCusrHelpAppContext dbContext, string answer, Guid questionId)
         {
